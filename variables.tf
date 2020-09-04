@@ -24,7 +24,7 @@ variable "source_private_route_count" {
 }
 
 variable "source_private_route_table_ids" {
-  type        = "list"
+  type        = list
   description = "A list of private route tables"
   default     = []
 }
@@ -35,7 +35,7 @@ variable "source_public_route_count" {
 }
 
 variable "source_public_route_table_ids" {
-  type        = "list"
+  type        = list
   description = "A list of public route tables"
   default     = []
 }
@@ -51,7 +51,7 @@ variable "target_private_route_count" {
 }
 
 variable "target_private_route_table_ids" {
-  type        = "list"
+  type        = list
   description = "A list of private route tables"
   default     = []
 }
@@ -62,7 +62,7 @@ variable "target_public_route_count" {
 }
 
 variable "target_public_route_table_ids" {
-  type        = "list"
+  type        = list
   description = "A list of public route tables"
   default     = []
 }
