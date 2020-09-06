@@ -12,7 +12,7 @@ resource "aws_route" "target_private_route_table" {
 
   route_table_id            = element(var.target_private_route_table_ids, count.index)
   destination_cidr_block    = var.source_peer_cird_block
-  vpc_peering_connection_id = aws_vpc_peering_connection.this.id
+  vpc_peering_connection_id = aws_vpc_peering_connection.this[count.index].id
 }
 
 resource "aws_route" "target_public_route_table" {
@@ -20,7 +20,7 @@ resource "aws_route" "target_public_route_table" {
 
   route_table_id            = element(var.target_public_route_table_ids, count.index)
   destination_cidr_block    = var.source_peer_cird_block
-  vpc_peering_connection_id = aws_vpc_peering_connection.this.id
+  vpc_peering_connection_id = aws_vpc_peering_connection.this[count.index].id
 }
 
 resource "aws_route" "source_private_route_table" {
@@ -28,7 +28,7 @@ resource "aws_route" "source_private_route_table" {
 
   route_table_id            = element(var.source_private_route_table_ids, count.index)
   destination_cidr_block    = var.target_peer_cird_block
-  vpc_peering_connection_id = aws_vpc_peering_connection.this.id
+  vpc_peering_connection_id = aws_vpc_peering_connection.this[count.index].id
 }
 
 resource "aws_route" "source_public_route_table" {
@@ -36,5 +36,5 @@ resource "aws_route" "source_public_route_table" {
 
   route_table_id            = element(var.source_public_route_table_ids, count.index)
   destination_cidr_block    = var.target_peer_cird_block
-  vpc_peering_connection_id = aws_vpc_peering_connection.this.id
+  vpc_peering_connection_id = aws_vpc_peering_connection.this[count.index].id
 }
