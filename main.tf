@@ -1,5 +1,5 @@
 resource "aws_vpc_peering_connection" "this" {
-  count = var.create_vpc_peering
+  count = var.create_vpc_peering ? 1 : 0
 
   peer_owner_id = var.owner_account_id
   peer_vpc_id   = var.vpc_peer_id
