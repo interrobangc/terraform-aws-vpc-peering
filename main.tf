@@ -10,7 +10,7 @@ resource "aws_vpc_peering_connection" "this" {
 resource "aws_route" "target_private_route_table" {
   count = var.create_vpc_peering ? var.target_private_route_count : 0
 
-  route_table_id            = var.create_vpc_peering ? element(var.target_private_route_table_ids, count.index) : false
+  route_table_id            = var.create_vpc_peering ? var.target_private_route_table_ids[count.index] : false
   destination_cidr_block    = var.source_peer_cird_block
   vpc_peering_connection_id = aws_vpc_peering_connection.this[count.index].id
 }
@@ -18,7 +18,7 @@ resource "aws_route" "target_private_route_table" {
 resource "aws_route" "target_public_route_table" {
   count = var.create_vpc_peering ? var.target_public_route_count : 0
 
-  route_table_id            = var.create_vpc_peering ? element(var.target_public_route_table_ids, count.index) : false
+  route_table_id            = var.create_vpc_peering ? var.target_public_route_table_ids[count.index] : false
   destination_cidr_block    = var.source_peer_cird_block
   vpc_peering_connection_id = aws_vpc_peering_connection.this[count.index].id
 }
@@ -26,7 +26,7 @@ resource "aws_route" "target_public_route_table" {
 resource "aws_route" "source_private_route_table" {
   count = var.create_vpc_peering ? var.source_private_route_count : 0
 
-  route_table_id            = var.create_vpc_peering ? element(var.source_private_route_table_ids, count.index) : false
+  route_table_id            = var.create_vpc_peering ? var.source_private_route_table_ids[count.index] : false
   destination_cidr_block    = var.target_peer_cird_block
   vpc_peering_connection_id = aws_vpc_peering_connection.this[count.index].id
 }
@@ -34,7 +34,7 @@ resource "aws_route" "source_private_route_table" {
 resource "aws_route" "source_public_route_table" {
   count = var.create_vpc_peering ? var.source_public_route_count : 0
 
-  route_table_id            = var.create_vpc_peering ? element(var.source_public_route_table_ids, count.index) : false
+  route_table_id            = var.create_vpc_peering ? var.source_public_route_table_ids[count.index] : false
   destination_cidr_block    = var.target_peer_cird_block
   vpc_peering_connection_id = aws_vpc_peering_connection.this[count.index].id
 }
